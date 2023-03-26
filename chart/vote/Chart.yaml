@@ -1,0 +1,12 @@
+apiVersion: v2
+name: vote
+description: A Helm chart for Vote app to deploy on Kubernetes cluster
+
+
+type: application
+
+
+version: 0.1.0
+
+
+appVersion: "0.1.0"

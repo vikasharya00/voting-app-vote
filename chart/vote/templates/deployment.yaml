@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: voting-app
+    tier: vote
+  name: vote
+spec:
+  replicas: {{.Values.replicas}}
+  selector:
+    matchLabels:
+      tier: vote
+  template:
+    metadata:
+      labels:
+        tier: vote
+    {{- include "PodTemplate" . | indent 4}}
+

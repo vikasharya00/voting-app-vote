@@ -1,0 +1,18 @@
+{{- define "PodTemplate"}}
+spec:
+  containers:
+  - image: {{.image}}
+    name: {{.containerName}}
+    ports:
+    - containerPort: {{.port}}
+
+{{- end}}
+
+{{- define "ServiceTemplate"}}
+type: {{.service.type}}
+ports:
+- name: "result-service"
+  port: {{.service.port}}
+  targetPort: {{.service.targetPort}}
+  nodePort: {{.service.nodePort}}
+{{- end}}

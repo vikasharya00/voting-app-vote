@@ -1,0 +1,4 @@
+fileignoreconfig:
+- filename: templates/index.html
+  checksum: 02e0b8c8ed223eaafba8d095c339457908cf9dcd5374597157dd01b10fe7ae75
+version: ""

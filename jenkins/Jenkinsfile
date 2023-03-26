@@ -1,0 +1,18 @@
+pipeline{
+    agent any
+    environment{
+        registry="vikasharya000/vote"
+    }
+    stages{
+        stage('Build docker image'){
+            steps{
+                sh 'docker build -t ${registry}:${BUILD_NUMBER}'
+            }
+        }
+        stage('Push docker image'){
+            steps{
+                sh 'docker push ${registry}:${BUILD_NUMBER}'
+            }
+        }
+    }
+}
