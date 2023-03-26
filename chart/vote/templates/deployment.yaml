@@ -14,5 +14,5 @@ spec:
     metadata:
       labels:
         tier: vote
-    {{- include "PodTemplate" . | indent 4}}
+    {{- include "PodTemplate" .Values | indent 4}}
 

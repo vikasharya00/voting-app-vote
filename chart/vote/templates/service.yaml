@@ -6,7 +6,7 @@ metadata:
     tier: vote
   name: vote-service
 spec:
-  {{- include "ServiceTemplate" . | indent 2}}
+  {{- include "ServiceTemplate" .Values | indent 2}}
   selector:
     tier: vote
   
