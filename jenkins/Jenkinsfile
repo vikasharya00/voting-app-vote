@@ -1,18 +1,25 @@
 pipeline{
     agent any
     environment{
-        registry="vikasharya000/vote"
+        registry="vikasharya000/vote" 
+        dockerImage=""  
     }
     stages{
-        stage('Build docker image'){
-            steps{
-                sh 'docker build -t ${registry}:${BUILD_NUMBER}'
-            }
+        stage('Building our image') { 
+            steps { 
+                script { 
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER" 
+                }
+            } 
         }
-        stage('Push docker image'){
-            steps{
-                sh 'docker push ${registry}:${BUILD_NUMBER}'
+        stage('Deploy our image') { 
+            steps { 
+                script { 
+                    docker.withRegistry( '', dockerhub_creds ) { 
+                        dockerImage.push() 
+                    }
+                } 
             }
-        }
+        } 
     }
 }
