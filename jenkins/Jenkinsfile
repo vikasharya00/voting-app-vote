@@ -31,11 +31,15 @@ pipeline{
 
                 }
                 script{
-                    echo "${dockertoken}"
+                    sh """
+                    minor_version=\$(grep 'version:' ./chart/vote/Chart.yaml | awk -F '.' '{print \$2}')
+                    new_minor_version=`expr \$minor_version + 1`
+                    sed -i "" "/^\([[:space:]]*version: \).*/s//\10.\${new_minor_version}.0/" ./chart/vote/Chart.yaml
+                    """
+
                     sh 'echo \${dockertoken} | helm registry login registry-1.docker.io -u vikasharya000 --password-stdin'
                     sh 'helm package ./chart/vote/'
                     sh 'helm push helm_vote-0.1.0.tgz oci://registry-1.docker.io/vikasharya000'
-
                 }
             }
         }
