@@ -34,7 +34,7 @@ pipeline{
                     sh """
                     minor_version=\$(grep 'version:' ./chart/vote/Chart.yaml | awk -F '.' '{print \$2}')
                     new_minor_version=`expr \$minor_version + 1`
-                    sed -i "" "/^\\([[:space:]]*version: \\).*/s//\\10.\$new_minor_version.0/" ./chart/vote/Chart.yaml
+                    cp ./chart/vote/Chart.yaml chart.yaml.tmp && sed "/^\\([[:space:]]*version: \\).*/s//\\10.\${new_minor_version}.0/" < chart.yaml.tmp >./chart/vote/Chart.yaml && rm -f chart.yaml.tmp
                     """
 
                     sh 'echo \${dockertoken} | helm registry login registry-1.docker.io -u vikasharya000 --password-stdin'
