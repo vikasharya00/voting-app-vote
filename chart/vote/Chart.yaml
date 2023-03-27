@@ -1,5 +1,5 @@
 apiVersion: v2
-name: vote
+name: helm_vote
 description: A Helm chart for Vote app to deploy on Kubernetes cluster
 
 
