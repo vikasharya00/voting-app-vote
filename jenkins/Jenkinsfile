@@ -39,7 +39,7 @@ pipeline{
 
                     sh 'echo \${dockertoken} | helm registry login registry-1.docker.io -u vikasharya000 --password-stdin'
                     sh 'helm package ./chart/vote/'
-                    sh 'helm push helm_vote-0.1.0.tgz oci://registry-1.docker.io/vikasharya000'
+                    sh 'helm push helm_vote-0.\${new_minor_version}.0.tgz oci://registry-1.docker.io/vikasharya000'
                 }
             }
         }
