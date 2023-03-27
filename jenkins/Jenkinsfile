@@ -3,7 +3,7 @@ pipeline{
     environment{
         registry="vikasharya000/vote" 
         dockerImage=""  
-        docker_pat='docker_pat'
+        dockertoken=credentials("docker-token")
     }
     stages{
         stage('Building our image') { 
@@ -31,7 +31,8 @@ pipeline{
 
                 }
                 script{
-                    sh 'echo ${docker_pat} | helm registry login registry-1.docker.io -u vikasharya000 --password-stdin'
+                    echo "${dockertoken}"
+                    sh 'echo \${dockertoken} | helm registry login registry-1.docker.io -u vikasharya000 --password-stdin'
                     sh 'helm package ./chart/vote/'
                     sh 'helm push helm_vote-0.1.0.tgz oci://registry-1.docker.io/vikasharya000'
 
