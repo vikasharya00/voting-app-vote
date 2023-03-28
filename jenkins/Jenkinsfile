@@ -25,21 +25,19 @@ pipeline{
         }
         stage('Package helm chart and push') {
             steps{
-                timeout(time: 10, unit: "SECONDS") {
 
-                    input message: 'approve the helm push?', ok: 'Yes'
-
-                }
                 script{
                     sh """
-                    minor_version=\$(grep 'version:' ./chart/vote/Chart.yaml | awk -F '.' '{print \$2}')
-                    new_minor_version=`expr \$minor_version + 1`
-                    cp ./chart/vote/Chart.yaml chart.yaml.tmp && sed "/^\\([[:space:]]*version: \\).*/s//\\10.\${new_minor_version}.0/" < chart.yaml.tmp >./chart/vote/Chart.yaml && rm -f chart.yaml.tmp
+                    cp ./chart/vote/Chart.yaml chart.yaml.tmp && sed "/^\\([[:space:]]*version: \\).*/s//\\10.\${BUILD_NUMBER}.0/" < chart.yaml.tmp >./chart/vote/Chart.yaml && rm -f chart.yaml.tmp
                     echo \${dockertoken} | helm registry login registry-1.docker.io -u vikasharya000 --password-stdin
                     helm package ./chart/vote/
-                    helm push helm_vote-0.\${new_minor_version}.0.tgz oci://registry-1.docker.io/vikasharya000
+                    helm push helm_vote-0.\${BUILD_NUMBER}.0.tgz oci://registry-1.docker.io/vikasharya000
                     """
                 }
+
+                build job: "voting-app-chart", wait: true,parameters: [
+                string(name: 'voteChartVersion', value: "0.${BUILD_NUMBER}.0")
+                ]
             }
         }
     }
