@@ -27,7 +27,7 @@ pipeline{
                 script {
                     sh """
                     touch ${HOME}/vote_image_scan.txt
-                    trivy image ${registry}:${BUILD_NUMBER} > ${HOME}/vote_image_scan`.txt
+                    trivy image ${registry}:${BUILD_NUMBER} > ${HOME}/vote_image_scan.txt
                     """
                 }
             }
