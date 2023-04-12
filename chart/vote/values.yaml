@@ -1,3 +1,11 @@
+green:
+  enabled: false
+
+blue:
+  enabled: false
+
+productionSlot: blue
+
 replicas: 1
 image: "vikasharya000/vote"
 #specify container name using containerName key

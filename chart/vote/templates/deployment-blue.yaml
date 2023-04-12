@@ -1,0 +1,21 @@
+{{ if .Values.blue.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vote-blue
+  labels:
+    app: voting-app
+    tier: vote
+spec:
+  replicas: {{.Values.replicas}}
+  selector:
+    matchLabels:
+      tier: vote
+  template:
+    metadata:
+      labels:
+        tier: vote
+        slot: blue
+    {{- include "PodTemplate" .Values | indent 4}}
+{{end}}
+

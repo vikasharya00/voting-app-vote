@@ -1,10 +1,11 @@
+{{ if .Values.green.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: vote-green
   labels:
     app: voting-app
     tier: vote
-  name: vote
 spec:
   replicas: {{.Values.replicas}}
   selector:
@@ -14,5 +15,7 @@ spec:
     metadata:
       labels:
         tier: vote
+        slot: green
     {{- include "PodTemplate" .Values | indent 4}}
+{{end}}
 
