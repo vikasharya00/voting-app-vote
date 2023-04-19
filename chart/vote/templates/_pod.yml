@@ -1,12 +1,3 @@
-{{- define "PodTemplate"}}
-spec:
-  containers:
-  - image: {{.image}}
-    name: {{.containerName}}
-    ports:
-    - containerPort: {{.port}}
-
-{{- end}}
 
 {{- define "ServiceTemplate"}}
 type: {{.service.type}}

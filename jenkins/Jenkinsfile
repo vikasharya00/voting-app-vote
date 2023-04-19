@@ -38,7 +38,7 @@ pipeline{
                 script{
                     sh """
                     cp ./chart/vote/Chart.yaml chart.yaml.tmp && sed "/^\\([[:space:]]*version: \\).*/s//\\10.\${BUILD_NUMBER}.0/" < chart.yaml.tmp >./chart/vote/Chart.yaml && rm -f chart.yaml.tmp
-                    cp ./chart/vote/values.yaml values.yaml.tmp && sed 's/vikasharya000\\/vote/vikasharya000\\/vote:${BUILD_NUMBER}/g' < values.yaml.tmp >./chart/vote/values.yaml && rm -f values.yaml.tmp
+                    cp ./chart/vote/values.yaml values.yaml.tmp && sed -e '/blue/ {' -e 'n; /^\\([[:space:]]*image: \\).*/s//\\1vikasharya000\\/vote:${BUILD_NUMBER}/' -e '}' < values.yaml.tmp >./chart/vote/values.yaml && rm -f values.yaml.tmp
                     cat ./chart/vote/values.yaml
                     echo \${dockertoken} | helm registry login registry-1.docker.io -u vikasharya000 --password-stdin
                     helm package ./chart/vote/
@@ -50,6 +50,9 @@ pipeline{
                 string(name: 'voteChartVersion', value: "0.${BUILD_NUMBER}.0")
                 ]
             }
-        }
+        }//
     }
 }
+/*
+cp ./chart/vote/values.yaml values.yaml.tmp && sed 's/vikasharya000\\/vote/vikasharya000\\/vote:${BUILD_NUMBER}/g' < values.yaml.tmp >./chart/vote/values.yaml && rm -f values.yaml.tmp
+*/`

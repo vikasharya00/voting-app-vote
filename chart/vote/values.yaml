@@ -1,12 +1,11 @@
 global:
-  green:
-    enabled: false
-  blue:
-    enabled: false
   productionSlot: blue
+green:
+  image: "vikasharya000/vote"
+blue:
+  image: "vikasharya000/vote"
 
 replicas: 1
-image: "vikasharya000/vote"
 #specify container name using containerName key
 containerName: vote
 port: 80
@@ -15,3 +14,6 @@ service:
   port: 80
   targetPort: 80
   nodePort: 31000
+
+
+

@@ -1,4 +1,3 @@
-{{ if .Values.global.green.enabled }}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -16,6 +15,11 @@ spec:
       labels:
         tier: vote
         slot: green
-    {{- include "PodTemplate" .Values | indent 4}}
-{{end}}
+    spec:
+      containers:
+      - image: {{.Values.green.image}}
+        name: {{.Values.containerName}}
+        ports:
+        - containerPort: {{.Values.port}}
+
 
