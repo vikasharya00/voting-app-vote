@@ -1,5 +1,4 @@
-global:
-  productionSlot: blue
+productionSlot: blue
 green:
   image: "vikasharya000/vote"
 blue:
