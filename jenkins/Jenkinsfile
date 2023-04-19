@@ -53,6 +53,3 @@ pipeline{
         }//
     }
 }
-/*
-cp ./chart/vote/values.yaml values.yaml.tmp && sed 's/vikasharya000\\/vote/vikasharya000\\/vote:${BUILD_NUMBER}/g' < values.yaml.tmp >./chart/vote/values.yaml && rm -f values.yaml.tmp
-*/`
