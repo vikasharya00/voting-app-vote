@@ -9,5 +9,5 @@ spec:
   {{- include "ServiceTemplate" .Values | indent 2}}
   selector:
     tier: vote
-    slot: {{.Values.global.productionSlot}}
+    slot: {{.Values.productionSlot}}
 
