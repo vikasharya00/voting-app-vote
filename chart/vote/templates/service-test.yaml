@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: voting-app
+    tier: vote
+  name: vote-test
+spec:
+  selector:
+    tier: vote
+    {{- if eq .Values.productionSlot "blue" }}
+    slot: green
+    {{- else }}
+    slot: blue
+    {{- end }}
+  type: {{.Values.service.type}}
+  ports:
+  - port: {{.Values.service.port}}
+    targetPort: {{.Values.service.targetPort}}
+    nodePort: {{.Values.service.nodePortTest}}
+
+
+
+
+
+

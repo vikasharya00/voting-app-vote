@@ -1,9 +1,8 @@
-productionSlot: blue
+productionSlot: green
 green:
   image: "vikasharya000/vote"
 blue:
   image: "vikasharya000/vote"
-
 replicas: 1
 #specify container name using containerName key
 containerName: vote
@@ -12,7 +11,5 @@ service:
   type: NodePort
   port: 80
   targetPort: 80
-  nodePort: 31000
-
-
-
+  nodePortLive: 31000
+  nodePortTest: 31001
